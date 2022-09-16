@@ -1,4 +1,175 @@
-body {
-    margin: 0;
-    position: relative;
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.main_nav {
+    border-bottom: 1px solid black;
+    position: relative;
+    width: 100%;
+}
+
+.main_nav-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.main_nav-header {
+    text-align: center;
+}
+
+#main_notes {
+    padding: 20px;
+}
+
+.note-container {
+    position: absolute;
+}
+
+.note {
+    background-color: #FFFF88;
+    display: flex;
+    flex-flow: column;
+    height: 288px;
+    padding: 10px;
+    position: relative;
+    width: 288px;
+}
+
+.note-header {
+    max-width: calc(100% - 10px);
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.note-header::-webkit-scrollbar {
+    display: none;
+}
+
+.note-header input {
+    all: unset;
+    font-family: Segoe Print;
+    font-size: 36px;
+    line-height: 0;
+    max-width: 100%;
+}
+
+.note-header input:disabled {
+    cursor: pointer;
+}
+
+.note-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 2px;
+    text-align: center;
+    top: 10px;
+    width: 20px;
+}
+
+.note-text {
+    align-items: flex-end;
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.note-text textarea {
+    all: unset;
+    font-family: Segoe Print;
+    height: calc(100% - 20px);
+    overflow-wrap: break-word;
+    resize: none;
+    width: 100%;
+}
+
+.right-resize {
+    background: transparent;
+    cursor: e-resize;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    width: 10px;
+    top: 0;
+}
+
+.bottom-resize {
+    background: transparent;
+    bottom: 0;
+    cursor: n-resize;
+    height: 10px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.note * {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                        supported by Chrome and Opera */
+  }
+  
