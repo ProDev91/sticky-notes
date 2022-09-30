@@ -90,8 +90,6 @@ button {
 .note {
     background-color: #FFFF88;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-    display: flex;
-    flex-flow: column;
     height: 288px;
     min-height: 200px;
     min-width: 200px;
@@ -102,6 +100,7 @@ button {
 }
 
 .note-header {
+    border-bottom: 1px solid black;
     max-width: calc(100% - 10px);
     overflow-x: scroll;
     -ms-overflow-style: none;
@@ -121,7 +120,7 @@ button {
 }
 
 .note-header:hover {
-    border-bottom: 1px solid black;
+    color: gray;
 }
 
 .note-header input:disabled {
@@ -151,6 +150,16 @@ button {
     overflow-wrap: break-word;
     resize: none;
     width: 100%;
+}
+
+.top-drag {
+    background: transparent;
+    cursor: grab;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 0;
 }
 
 .right-resize {

@@ -15,16 +15,17 @@ function createNote() {
     const noteTextContainer = createNoteElement("div", "note-text")
     const rightResizer = createNoteElement("div", "right-resize")
     const bottomResizer = createNoteElement("div", "bottom-resize")
+    const topDragger = createNoteElement("div", "top-drag")
     const newNote = createNoteElement("div", "note")
     const noteContainer = createNoteElement("div", "note-container")
     const mainNotes = document.getElementById("main_notes");
 
-    addNoteClickEvents(noteHeaderContainer, noteIconContainer, noteHeader, rightResizer, bottomResizer)
+    addNoteClickEvents(noteHeaderContainer, noteIconContainer, noteHeader, rightResizer, bottomResizer, topDragger)
 
     noteHeaderContainer.appendChild(noteHeader);
     noteIconContainer.appendChild(noteIcon);
     noteTextContainer.appendChild(noteText);
-    newNote.append(noteHeaderContainer, noteIconContainer, noteTextContainer, rightResizer, bottomResizer);
+    newNote.append(noteHeaderContainer, noteIconContainer, noteTextContainer, rightResizer, bottomResizer, topDragger);
     noteContainer.appendChild(newNote);
     mainNotes.appendChild(noteContainer);
 
@@ -39,13 +40,14 @@ function createNoteElement(elementType, className) {
     return element;
 }
 
-function addNoteClickEvents(header, icon, input, rightResizer, bottomResizer) {
+function addNoteClickEvents(header, icon, input, rightResizer, bottomResizer, topDragger) {
     header.addEventListener("click", enableHeader)
     header.addEventListener("keypress", disableHeader)
     input.addEventListener("blur", disableHeader)
     icon.addEventListener("click", showNoteSettings)
     rightResizer.addEventListener("mousedown", initDrag)
     bottomResizer.addEventListener("mousedown", initDrag)
+    topDragger.addEventListener("mousedown", initMove)
 }
 
 function enableHeader(event) {
@@ -66,16 +68,23 @@ function initDrag(e) {
 
     startX = e.clientX;
     startY = e.clientY;
+
     startWidth = parseInt(
       document.defaultView.getComputedStyle(element).width,
       10
     );
+
     startHeight = parseInt(
       document.defaultView.getComputedStyle(element).height,
       10
     );
+
     document.documentElement.addEventListener("mousemove", doDrag, false);
     document.documentElement.addEventListener("mouseup", stopDrag, false);
+  }
+
+  function initMove(e) {
+    const element = null;
   }
 
   function doDrag(e) {
@@ -88,63 +97,26 @@ function initDrag(e) {
     document.documentElement.removeEventListener("mouseup", stopDrag, false);
   }
 
+  function initMove(e) {
+    element = this.parentElement;
 
+    startX = e.clientX;
+    startY = e.clientY;
 
+    document.documentElement.addEventListener("mousemove", random, false);
+    document.documentElement.addEventListener("mouseup", stopRandom, false);
+  }
 
+  function random(e) {
+    element.style.left = e.clientX - startX + "px";
+    element.style.top = e.clientY - startY + "px";
+    element.querySelector('.top-drag').style.cursor = 'grabbing';
 
+  }
 
-// function initResizeElement() {
-//     var popups = document.getElementsByClassName("popup");
-//     var element = null;
-//     var startX, startY, startWidth, startHeight;
-  
-//     for (var i = 0; i < popups.length; i++) {
-//       var p = popups[i];
-  
-//       var right = document.createElement("div");
-//       right.className = "resizer-right";
-//       p.appendChild(right);
-//       right.addEventListener("mousedown", initDrag, false);
-//       right.parentPopup = p;
-  
-//       var bottom = document.createElement("div");
-//       bottom.className = "resizer-bottom";
-//       p.appendChild(bottom);
-//       bottom.addEventListener("mousedown", initDrag, false);
-//       bottom.parentPopup = p;
-  
-//       var both = document.createElement("div");
-//       both.className = "resizer-both";
-//       p.appendChild(both);
-//       both.addEventListener("mousedown", initDrag, false);
-//       both.parentPopup = p;
-//     }
-  
-//     function initDrag(e) {
-//       element = this.parentPopup;
-  
-//       startX = e.clientX;
-//       startY = e.clientY;
-//       startWidth = parseInt(
-//         document.defaultView.getComputedStyle(element).width,
-//         10
-//       );
-//       startHeight = parseInt(
-//         document.defaultView.getComputedStyle(element).height,
-//         10
-//       );
-//       document.documentElement.addEventListener("mousemove", doDrag, false);
-//       document.documentElement.addEventListener("mouseup", stopDrag, false);
-//     }
-  
-//     function doDrag(e) {
-//       element.style.width = startWidth + e.clientX - startX + "px";
-//       element.style.height = startHeight + e.clientY - startY + "px";
-//     }
-  
-//     function stopDrag() {
-//       document.documentElement.removeEventListener("mousemove", doDrag, false);
-//       document.documentElement.removeEventListener("mouseup", stopDrag, false);
-//     }
-//   }
-  
+  function stopRandom() {
+    document.documentElement.removeEventListener("mousemove", random, false);
+    document.documentElement.removeEventListener("mouseup", stopRandom, false);
+    element.querySelector('.top-drag').style.cursor = 'grab';
+    console.log('sdas')
+  }
