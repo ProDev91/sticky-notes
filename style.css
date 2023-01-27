@@ -61,8 +61,20 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    background: #218838;
+}
+
+.main {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+    width: 100vw;
+}
+
 .main_nav {
     border-bottom: 1px solid black;
+    padding: 10px;
     position: relative;
     width: 100%;
 }
@@ -73,11 +85,25 @@ button {
     top: 10px;
 }
 
+#create-note-btn {
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: .375rem .75rem;
+}
+
+#create-note-btn:hover {
+    background: #218838;
+}
+
 .main_nav-header {
     text-align: center;
 }
 
 #main_notes {
+    overflow: scroll;
     position: relative;
 }
 
@@ -85,6 +111,10 @@ button {
     left: 20px;
     position: absolute;
     top: 20px;
+}
+
+.active-note {
+    z-index: 1;
 }
 
 .note {
@@ -101,7 +131,7 @@ button {
 
 .note-header {
     border-bottom: 1px solid black;
-    max-width: calc(100% - 10px);
+    max-width: calc(100% - 20px);
     overflow-x: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -119,7 +149,7 @@ button {
     max-width: 100%;
 }
 
-.note-header:hover {
+.note-header input:disabled:hover {
     color: gray;
 }
 
@@ -131,9 +161,10 @@ button {
     cursor: pointer;
     font-size: 36px;
     position: absolute;
-    right: 10px;
+    right: 5px;
     text-align: center;
     top: 10px;
+    width: 25px;
 }
 
 .note-text {
@@ -164,20 +195,129 @@ button {
 
 .right-resize {
     background: transparent;
-    cursor: e-resize;
+    cursor: ew-resize;
     height: 100%;
     position: absolute;
-    right: 0;
-    width: 10px;
+    right: -5px;
+    width: 15px;
     top: 0;
 }
 
 .bottom-resize {
     background: transparent;
-    bottom: 0;
-    cursor: n-resize;
-    height: 10px;
+    bottom: -5px;
+    cursor: ns-resize;
+    height: 15px;
     left: 0;
     position: absolute;
     width: 100%;
+}
+
+.corner-resize {
+    background: transparent;
+    bottom: 0;
+    cursor: nwse-resize;
+    height: 10px;
+    right: 0;
+    position: absolute;
+    width: 10px;
+}
+
+.moving * {
+    user-select: none;
+}
+
+.color-options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.note-settings {
+    background: white;
+    border: 1px solid black;
+    max-width: 200px;
+    padding: 20px;
+    position: absolute;
+    right: -200px;
+    top: 0;
+    width: 100%;
+}
+
+.color-option {
+    border-radius: 50%;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+}
+
+.color-option:hover {
+    border: 2px solid black;
+}
+
+.color-option_red {
+    background: #eb6092;
+}
+
+.color-option_green {
+    background: #abcc51;
+}
+
+.color-option_yellow {
+    background: #FFFF88;
+}
+
+.color-option_blue {
+    background: #4ab6d9;
+}
+
+.hide {
+    display: none;
+}
+
+.delete-btn {
+    color: white;
+    cursor: pointer;
+    background: red;
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.delete-btn:hover {
+    background: rgb(167, 0, 0);
+}
+
+.hide-settings {
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+    .right-resize {
+        right: -15px;
+        width: 25px;
+    }
+    
+    .bottom-resize {
+        height: 25px;
+    }
+    
+    .corner-resize {
+        height: 20px;
+        width: 20px;
+    }
+}
+
+@media screen and (max-width: 475px) {
+    .main_nav-header {
+        text-align: left;
+    }
+
+    .note-header input {
+        font-size: 28px;
+    }
 }
